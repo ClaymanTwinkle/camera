@@ -293,7 +293,6 @@ class CameraFragment : Fragment() {
             }
         }
 
-        CameraX.unbindAll()
         // Apply declared configs to CameraX using the same lifecycle owner
         CameraX.bindToLifecycle(
                 viewLifecycleOwner, preview, imageCapture, imageAnalyzer)
@@ -351,6 +350,7 @@ class CameraFragment : Fragment() {
             try {
                 // Only bind use cases if we can query a camera with this orientation
                 CameraX.getCameraWithLensFacing(lensFacing)
+                CameraX.unbindAll()
                 bindCameraUseCases()
             } catch (exc: Exception) {
                 // Do nothing
